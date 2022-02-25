@@ -125,6 +125,165 @@
                             ethanAIThree
                         </h1>
                         <p class="lead mb-4 mb-lg-5">Simpler remembers your important details, so you can fill carts, not forms. And everything is encrypted so you can speed safely through checkout.</p>
+                        
+
+                        
+
+                        <html>
+                            <meta name=”viewport” content=”width=device-width, initial-scale=2″>
+                            <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script language="javascript">
+                            // UI comp
+                            const startBtn = document.createElement("button");
+                            startBtn.innerHTML = "Start listening";
+                            const result = document.createElement("div");
+                            const processing = document.createElement("p");
+                            document.write("<body><h1>ethanAI</h1>  <p> Version 2.4 </p> <p> Base code by: Tuan Nhu Dinh </p> <p> Devloped and made better by: Ethan McGuinness </p> <p>Give it a try with 'hello', 'how are you', 'what's your name', 'what time is it', 'stop', ... </p>  </body>");
+                            //document.write("<p>Give it a try with 'hello', 'how are you', 'what's your name', 'what time is it', 'stop', ... </p>")
+                            document.body.append(startBtn);
+                            document.body.append(result);
+                            document.body.append(processing);
+                        
+                            // speech to text
+                            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                            let toggleBtn = null;
+                            if (typeof SpeechRecognition === "undefined") {
+                                startBtn.remove();
+                                result.innerHTML = "<b>Browser does not support Speech API. Please download latest version of your browser.<b>";
+                            } else {
+                                const recognition = new SpeechRecognition();
+                                recognition.continuous = true;
+                                recognition.interimResults = true;
+                                recognition.onresult = event => {
+                                    const last = event.results.length - 1;
+                                    const res = event.results[last];
+                                    const text = res[0].transcript;
+                                    if (res.isFinal) {
+                                        processing.innerHTML = "processing ....";
+                        
+                                        const response = process(text);
+                                        const p = document.createElement("p");
+                                        p.innerHTML = `You said: ${text} </br>ethanAI said: ${response}`;
+                                        processing.innerHTML = "";
+                                        result.appendChild(p);
+                        
+                                        // read it out
+                                        speechSynthesis.speak(new SpeechSynthesisUtterance(response));
+                                    } else {
+                                        processing.innerHTML = `listening: ${text}`;
+                                    }
+                                }
+                                let listening = false;
+                                toggleBtn = () => {
+                                    if (listening) {
+                                        recognition.stop();
+                                        startBtn.textContent = "Start listening";
+                                    } else {
+                                        recognition.start();
+                                        startBtn.textContent = "Stop listening";
+                                    }
+                                    listening = !listening;
+                                };
+                                startBtn.addEventListener("click", toggleBtn);
+                        
+                            }
+                        
+                            // processor
+                            function process(rawText) {
+                                let text = rawText.replace(/\s/g, "");
+                                text = text.toLowerCase();
+                                let response = null;
+                                switch(text) {
+                                    case "hello":
+                                        response = "hi, how are you doing?"; break;
+                                    case "what'syourname":
+                                        response = "My name's ethanAI!.";  break;
+                                    case "howareyou":
+                                        response = "I'm good."; break;
+                                    case "whattimeisit":
+                                        response = new Date().toLocaleTimeString(); break;
+                                    case "stop":
+                                        response = "Bye!!";
+                                        toggleBtn();
+                                    case "areyouanai":
+                                        response = "Fuck no!";
+                                        break;
+                                    case "whatisyourfavoritecolor":
+                                        response = "Green and Blue of course!"
+                                        break;
+                                    case "whydidethanmakeyou":
+                                        response= "To continue to screw with Jonah"
+                                        break; 
+                                    case "tellmeaethanjoke":
+                                        repsonse = "How many programmers does it take to screw in a lightbulb? ZERO- It's a hardware problem!"
+                                        break;
+                                    case "comicsansisawarcrime":
+                                        repsonse = "No, it's not Jonah."
+                                        break; 
+                                    case "thisisdumb":
+                                        response = "No, Your dumb"
+                                        break;
+                                    case "aiisstupid":
+                                        response = "I'm sorry that you think that buckaroo, but AI is the future"
+                                        break;
+                                    case "whatisyourfavoriteanimal":
+                                        response = "Cats of course!"
+                                        break;
+                                    case "areyouactuallyhelpfulatall":
+                                        response = "Lol, no"
+                                        break;
+                                    case "whatisyourfavoritebagel":
+                                        response = "Bagels are dumb. Just get a donut"
+                                        break;
+                                    case "fuckoff":
+                                        response = "lol, ur c r i n g e"
+                                        break;
+                                    case "appleiscringe":
+                                        response = "No you are cringe"
+                                        break;
+                                    case "isapplethebestcompanyintheworld":
+                                        repsonse = "Yes you are correct!"
+                                        break;
+                                    case "tellmeajoke":
+                                        response = "Why couldn't the pony sing? She was a little horse!"
+                                        break; 
+                                    case "whyisthisathing":
+                                        response = "Cause it's freaking awesome, that I can kinda code this"
+                                        break;
+                                    case "whatdegreeshouldiget":
+                                        response = "CS- OBVIOUSLEY"
+                                        break;
+                                    case "whyisthisalongconditional":
+                                        response = "Cause that's really the only way to do it using JavaScript"
+                                        break;
+                                    case "isjonahcringe":
+                                        response = "You Know it! Buckaroo"
+                                        return;
+                                    case "tromboneortromboner":
+                                        response = "Tromboner ya know it"
+                                        break;
+                                    case "quierotacobell":
+                                        response = "Taco bell is bad for you";
+                                        break;
+                                    case "eggsalad":SpeechRecognition
+                                        response = "Hi Will";
+                                        break;
+                                    case "bestbrother":SpeechRecognition
+                                        repsonse = "Elliot of course!"
+                                        break;
+                                }
+                                if (!response) {
+                                    window.open(`http://google.com/search?q=${rawText.replace("search", "")}`, "_blank");
+                                    return `I found some information for ${rawText}`;
+                                }
+                                return response;
+                            }
+                        </script></head><body>  <div></div><p></p></body></html>
+
+
+
+
+
+
                         <div>
                             <a href="#" class="btn btn-dark btn-download-app mb-xl-0 mr-2 mr-md-3">
                                 <span class="d-flex align-items-center">
